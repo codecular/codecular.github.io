@@ -21,7 +21,7 @@ GameOver.prototype = GameOver_proto;
 GameOver.prototype.constructor = GameOver;
 
 GameOver.prototype.init = function () {
-	
+	this.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
 };
 
 GameOver.prototype.preload = function () {
