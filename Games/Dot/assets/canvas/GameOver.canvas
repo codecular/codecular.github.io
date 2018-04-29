@@ -1,0 +1,86 @@
+{
+  "canvas-version": 2,
+  "settings": {
+    "className": "GameOver",
+    "sceneWidth": 576,
+    "sceneHeight": 1024,
+    "generateOnSave": true,
+    "enableStepping": false,
+    "lang": "JAVA_SCRIPT",
+    "baseClass": "Phaser.State",
+    "backgroundColor": [
+      180,
+      180,
+      180
+    ],
+    "gridColor": [
+      200,
+      200,
+      200
+    ],
+    "showGrid": true
+  },
+  "stateSettings": {
+    "stageBackgroundColor": [
+      0,
+      0,
+      0
+    ],
+    "autoLoad": true,
+    "preloadSpriteId": "",
+    "preloadSprite_direction": 0,
+    "load.pack": []
+  },
+  "world": {
+    "type": "group",
+    "id": "0eee1eca-b795-4ba9-9e14-aa3c3a67731e",
+    "info": {
+      "editorName": "GameOver",
+      "setAll": [],
+      "children": [
+        {
+          "type": "text",
+          "id": "6c56244f-6605-4bca-bd85-799ac1a415a0",
+          "info": {
+            "editorName": "text",
+            "x": 99,
+            "y": 329,
+            "text": "Game Over",
+            "style.fontSize": 70,
+            "style.fill": "#ffffff"
+          }
+        },
+        {
+          "type": "button",
+          "id": "2e34ae0f-11c6-4e45-9e8f-6a8d4b6b0618",
+          "asset": "0",
+          "info": {
+            "editorName": "Replay",
+            "x": 185,
+            "y": 523,
+            "callback": "replay"
+          }
+        },
+        {
+          "type": "text",
+          "id": "898283ee-299e-4088-a4f1-550e98cc6742",
+          "info": {
+            "editorName": "score",
+            "x": 164,
+            "y": 157,
+            "text": "Score :1",
+            "style.fontSize": 50,
+            "style.fill": "#ffffff"
+          }
+        }
+      ]
+    }
+  },
+  "type": "STATE",
+  "asset-table": {"0": {
+    "file": "WebContent/assets/pack.json",
+    "section": "images",
+    "asset": "Replay"
+  }},
+  "prefab-table": {}
+}

@@ -1,0 +1,29 @@
+{
+  "images": [
+    {
+      "type": "image",
+      "key": "Bg",
+      "url": "assets/sprites/Bg.png",
+      "overwrite": false
+    },
+    {
+      "type": "image",
+      "key": "Replay",
+      "url": "assets/sprites/Replay.png",
+      "overwrite": false
+    },
+    {
+      "type": "image",
+      "key": "Right",
+      "url": "assets/sprites/Right.png",
+      "overwrite": false
+    }
+  ],
+  "meta": {
+    "generated": "1525015345746",
+    "app": "Phaser Editor",
+    "url": "http://phasereditor.boniatillo.com",
+    "version": "1.0",
+    "copyright": "Arian Fornaris (c) 2015,2016"
+  }
+}
