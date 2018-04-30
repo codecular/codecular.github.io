@@ -73,7 +73,6 @@ Level.prototype.constructor = Level;
 Level.prototype.init = function () {
 	
 	this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-	this.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
 	this.scale.pageAlignHorizontally = true;
 	this.scale.pageAlignVertically = true;
 	
@@ -86,7 +85,8 @@ Level.prototype.preload = function () {
 };
 
 Level.prototype.create = function () {
-	scoreLabel=this.add.text(458.0, 42.0, '0', {"font":"bold 50px Arial","fill":"#ffffff"});
+	
+	this.add.text(458.0, 42.0, '1', {"font":"bold 50px Arial","fill":"#ffffff"});
 	
 	var _Right = this.add.button(491.0, 904.0, 'Right', right, this, null, null, null, null);
 	_Right.scale.setTo(0.3, 0.3);
@@ -94,39 +94,44 @@ Level.prototype.create = function () {
 	var _Left = this.add.button(148.0, 904.0, 'Right', left, this, null, null, null, null);
 	_Left.scale.setTo(-0.3, 0.3);
 	
+	var _fullscreenImage = this.add.button(10.0, 9.0, 'fullscreenImage', fullScreen, this, null, null, null, null);
+	_fullscreenImage.scale.setTo(0.3, 0.3);
+	
 	
 	timer=this.time.create(false);
-		timer.loop(3000, generator, this);
-		timer.start();
-		
-		
-		generatedGraphics= this.add.graphics(this.world.centerX, this.world.centerY);
-		
-	    //  Our first arc will be a line only
-		// generatedGraphics.lineStyle(30, 0xffd900);
+			timer.loop(3000, generator, this);
+			timer.start();
 			
-		    // graphics.arc(0, 0, 135, game.math.degToRad(0), game.math.degToRad(90), false);
-		// generatedGraphics.arc(0, 0, genetatedRadious,this.math.degToRad(2),  this.math.degToRad(178), false);
-		 
-		 graphics = this.add.graphics(this.world.centerX, this.world.centerY);
-		
-			    //  Our first arc will be a line only
-	//		    graphics.lineStyle(30, 0xffd900);
-	//			
-	//		    // graphics.arc(0, 0, 135, game.math.degToRad(0), game.math.degToRad(90), false);
-	//		    graphics.arc(0, 0, 135,this.math.degToRad(2),  this.math.degToRad(178), false);
-	//		    graphics.lineStyle(30, 0xff0000);
-	//		    graphics.arc(0, 0, 135,this.math.degToRad(182),  this.math.degToRad(358), false);
-			    //  As we wish to draw a 2nd arc on the SAME Graphics object, we need to move the drawing operation
-			    // graphics.moveTo(-100, -100);
-			   
-			    
-		seg1.create(graphics,this);
-		seg2.create(generatedGraphics,this);
-		width=10;
-		radious=200;
-		score=0;
-		isGameOver=false;
+			
+			generatedGraphics= this.add.graphics(this.world.centerX, this.world.centerY);
+			
+		    //  Our first arc will be a line only
+			// generatedGraphics.lineStyle(30, 0xffd900);
+				
+			    // graphics.arc(0, 0, 135, game.math.degToRad(0), game.math.degToRad(90), false);
+			// generatedGraphics.arc(0, 0, genetatedRadious,this.math.degToRad(2),  this.math.degToRad(178), false);
+			 
+			 graphics = this.add.graphics(this.world.centerX, this.world.centerY);
+			
+				    //  Our first arc will be a line only
+		//		    graphics.lineStyle(30, 0xffd900);
+		//			
+		//		    // graphics.arc(0, 0, 135, game.math.degToRad(0), game.math.degToRad(90), false);
+		//		    graphics.arc(0, 0, 135,this.math.degToRad(2),  this.math.degToRad(178), false);
+		//		    graphics.lineStyle(30, 0xff0000);
+		//		    graphics.arc(0, 0, 135,this.math.degToRad(182),  this.math.degToRad(358), false);
+				    //  As we wish to draw a 2nd arc on the SAME Graphics object, we need to move the drawing operation
+				    // graphics.moveTo(-100, -100);
+				   
+				    
+			seg1.create(graphics,this);
+			seg2.create(generatedGraphics,this);
+			width=10;
+			radious=200;
+			score=0;
+			isGameOver=false;
+			generatedAngle=0;
+			generatedGraphics.angle=generatedAngle;
 	
 };
 
@@ -137,7 +142,8 @@ function left(){
 	if(isGameOver)
 		return;
 	currentAngle-=step;
-	this.add.tween(angle).to({max:currentAngle},400,"Linear",true,0,0,false); 
+	this.add.tween(angle).to({max:currentAngle},400,"Linear",true,0,0,false);
+	
   //console.log("Left clicked");
 }
 function right(){
@@ -154,15 +160,23 @@ function generator(){
 		return;
 	
 	// console.log("generator 2");
-	 var angleFactor=this.rnd.integerInRange(0, 360)%step;	
+	 var angleFactor=this.rnd.integerInRange(0, 2);	
 	 generatedAngle=angleFactor*step;
 	 generatedGraphics.angle=generatedAngle;
 	generated=true;
 	
 }
 
-function replay(){
-	
+function fullScreen(){
+	this.scale.fullScreenScaleMode=Phaser.ScaleManager.EXACT_FIT;
+	if(this.scale.isFullScreen){
+		this.scale.stopFullScreen();
+	}
+	else
+	{
+		this.scale.startFullScreen();
+	}
+	console.log("Sull screen");
 }
 function isMatched(generatedAngle,userAngle,segmentAngle){
 	var number1=((360+generatedAngle)%360)/segmentAngle;

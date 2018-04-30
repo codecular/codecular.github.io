@@ -17,10 +17,16 @@
       "key": "Right",
       "url": "assets/sprites/Right.png",
       "overwrite": false
+    },
+    {
+      "type": "image",
+      "key": "fullscreenImage",
+      "url": "assets/sprites/fullscreenImage.png",
+      "overwrite": false
     }
   ],
   "meta": {
-    "generated": "1525015345746",
+    "generated": "1525056648990",
     "app": "Phaser Editor",
     "url": "http://phasereditor.boniatillo.com",
     "version": "1.0",

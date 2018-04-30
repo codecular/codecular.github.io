@@ -19,7 +19,7 @@
       200
     ],
     "showGrid": true,
-    "create_after": "timer=this.time.create(false);\r\n\ttimer.loop(5000, generator, this);\r\n\ttimer.start();\r\n\t\r\n\t\r\n\tgeneratedGraphics= this.add.graphics(this.world.centerX, this.world.centerY);\r\n\t\r\n    //  Our first arc will be a line only\r\n\t// generatedGraphics.lineStyle(30, 0xffd900);\r\n\t\t\r\n\t    // graphics.arc(0, 0, 135, game.math.degToRad(0), game.math.degToRad(90), false);\r\n\t// generatedGraphics.arc(0, 0, genetatedRadious,this.math.degToRad(2),  this.math.degToRad(178), false);\r\n\t \r\n\t graphics = this.add.graphics(this.world.centerX, this.world.centerY);\r\n\t\r\n\t\t    //  Our first arc will be a line only\r\n//\t\t    graphics.lineStyle(30, 0xffd900);\r\n//\t\t\t\r\n//\t\t    // graphics.arc(0, 0, 135, game.math.degToRad(0), game.math.degToRad(90), false);\r\n//\t\t    graphics.arc(0, 0, 135,this.math.degToRad(2),  this.math.degToRad(178), false);\r\n//\t\t    graphics.lineStyle(30, 0xff0000);\r\n//\t\t    graphics.arc(0, 0, 135,this.math.degToRad(182),  this.math.degToRad(358), false);\r\n\t\t    //  As we wish to draw a 2nd arc on the SAME Graphics object, we need to move the drawing operation\r\n\t\t    // graphics.moveTo(-100, -100);\r\n\t\t   \r\n\t\t    \r\n\tseg1.create(graphics,this);\r\n\tseg2.create(generatedGraphics,this);"
+    "create_after": "timer=this.time.create(false);\r\n\t\ttimer.loop(3000, generator, this);\r\n\t\ttimer.start();\r\n\t\t\r\n\t\t\r\n\t\tgeneratedGraphics= this.add.graphics(this.world.centerX, this.world.centerY);\r\n\t\t\r\n\t    //  Our first arc will be a line only\r\n\t\t// generatedGraphics.lineStyle(30, 0xffd900);\r\n\t\t\t\r\n\t\t    // graphics.arc(0, 0, 135, game.math.degToRad(0), game.math.degToRad(90), false);\r\n\t\t// generatedGraphics.arc(0, 0, genetatedRadious,this.math.degToRad(2),  this.math.degToRad(178), false);\r\n\t\t \r\n\t\t graphics = this.add.graphics(this.world.centerX, this.world.centerY);\r\n\t\t\r\n\t\t\t    //  Our first arc will be a line only\r\n\t//\t\t    graphics.lineStyle(30, 0xffd900);\r\n\t//\t\t\t\r\n\t//\t\t    // graphics.arc(0, 0, 135, game.math.degToRad(0), game.math.degToRad(90), false);\r\n\t//\t\t    graphics.arc(0, 0, 135,this.math.degToRad(2),  this.math.degToRad(178), false);\r\n\t//\t\t    graphics.lineStyle(30, 0xff0000);\r\n\t//\t\t    graphics.arc(0, 0, 135,this.math.degToRad(182),  this.math.degToRad(358), false);\r\n\t\t\t    //  As we wish to draw a 2nd arc on the SAME Graphics object, we need to move the drawing operation\r\n\t\t\t    // graphics.moveTo(-100, -100);\r\n\t\t\t   \r\n\t\t\t    \r\n\t\tseg1.create(graphics,this);\r\n\t\tseg2.create(generatedGraphics,this);\r\n\t\twidth=10;\r\n\t\tradious=200;\r\n\t\tscore=0;\r\n\t\tisGameOver=false;\r\n\t\tgeneratedAngle=0;\r\n\t\tgeneratedGraphics.angle=generatedAngle;"
   },
   "stateSettings": {
     "scaleMode": "SHOW_ALL",
@@ -79,15 +79,35 @@
             "scale.y": 0.3,
             "callback": "left"
           }
+        },
+        {
+          "type": "button",
+          "id": "76e9ce2e-2819-4519-a42a-57393d427478",
+          "asset": "1",
+          "info": {
+            "editorName": "fullscreenImage",
+            "x": 10,
+            "y": 9,
+            "scale.x": 0.3,
+            "scale.y": 0.3,
+            "callback": "fullScreen"
+          }
         }
       ]
     }
   },
   "type": "STATE",
-  "asset-table": {"0": {
-    "file": "WebContent/assets/pack.json",
-    "section": "images",
-    "asset": "Right"
-  }},
+  "asset-table": {
+    "0": {
+      "file": "WebContent/assets/pack.json",
+      "section": "images",
+      "asset": "Right"
+    },
+    "1": {
+      "file": "WebContent/assets/pack.json",
+      "section": "images",
+      "asset": "fullscreenImage"
+    }
+  },
   "prefab-table": {}
 }
