@@ -13,5 +13,5 @@ window.onload = function() {
 };
 
 var score=0;
-
+var bestScore=0;
 var message="";

@@ -66,9 +66,21 @@
           "id": "898283ee-299e-4088-a4f1-550e98cc6742",
           "info": {
             "editorName": "score",
-            "x": 164,
-            "y": 157,
+            "x": 129,
+            "y": 147,
             "text": "Score :1",
+            "style.fontSize": 50,
+            "style.fill": "#ffffff"
+          }
+        },
+        {
+          "type": "text",
+          "id": "ba72064b-1871-42bd-8a7f-0c6bf5d1c240",
+          "info": {
+            "editorName": "bestScore",
+            "x": 125,
+            "y": 221,
+            "text": "Best Score :1",
             "style.fontSize": 50,
             "style.fill": "#ffffff"
           }

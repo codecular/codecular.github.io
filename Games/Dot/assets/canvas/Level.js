@@ -73,6 +73,7 @@ Level.prototype.constructor = Level;
 Level.prototype.init = function () {
 	
 	this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+	this.scale.fullScreenScaleMode=Phaser.ScaleManager.SHOW_ALL;
 	this.scale.pageAlignHorizontally = true;
 	this.scale.pageAlignVertically = true;
 	
@@ -85,8 +86,7 @@ Level.prototype.preload = function () {
 };
 
 Level.prototype.create = function () {
-	
-	this.add.text(458.0, 42.0, '1', {"font":"bold 50px Arial","fill":"#ffffff"});
+	scoreLabel=this.add.text(458.0, 42.0, '0', {"font":"bold 50px Arial","fill":"#ffffff"});
 	
 	var _Right = this.add.button(491.0, 904.0, 'Right', right, this, null, null, null, null);
 	_Right.scale.setTo(0.3, 0.3);
@@ -132,6 +132,7 @@ Level.prototype.create = function () {
 			isGameOver=false;
 			generatedAngle=0;
 			generatedGraphics.angle=generatedAngle;
+			graphics.angle=0;
 	
 };
 
@@ -168,7 +169,7 @@ function generator(){
 }
 
 function fullScreen(){
-	this.scale.fullScreenScaleMode=Phaser.ScaleManager.EXACT_FIT;
+	this.scale.fullScreenScaleMode=Phaser.ScaleManager.SHOW_ALL;
 	if(this.scale.isFullScreen){
 		this.scale.stopFullScreen();
 	}
@@ -206,6 +207,9 @@ Level.prototype.update=function(){
 				    this.state.start("GameOver");
 				    message="Game Over";
 					isGameOver=true;
+					if(score>bestScore){
+						bestScore=score;
+					}
 				}
 			genetatedRadious=0;
 			generated=false;

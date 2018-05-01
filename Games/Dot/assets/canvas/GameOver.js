@@ -21,7 +21,8 @@ GameOver.prototype = GameOver_proto;
 GameOver.prototype.constructor = GameOver;
 
 GameOver.prototype.init = function () {
-	this.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
+	this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+	this.scale.fullScreenScaleMode=Phaser.ScaleManager.SHOW_ALL;
 };
 
 GameOver.prototype.preload = function () {
@@ -31,11 +32,13 @@ GameOver.prototype.preload = function () {
 };
 
 GameOver.prototype.create = function () {
-	this.add.text(99.0, 329.0, message, {"font":"bold 70px Arial","fill":"#ffffff"});
+	this.add.text(99.0, 329.0, 'Game Over', {"font":"bold 70px Arial","fill":"#ffffff"});
 	
 	this.add.button(185.0, 523.0, 'Replay', replay, this, null, null, null, null);
 	
-	this.add.text(164.0, 157.0, 'Score :'+score, {"font":"bold 50px Arial","fill":"#ffffff"});
+	this.add.text(129.0, 147.0, 'Score :'+score, {"font":"bold 50px Arial","fill":"#ffffff"});
+	
+	this.add.text(125.0, 221.0, 'Best Score :'+bestScore, {"font":"bold 50px Arial","fill":"#ffffff"});
 	
 	
 	
