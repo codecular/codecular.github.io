@@ -1,7 +1,7 @@
 
 // -- user code here --
 var angle={max:0};
-var step=180;
+var rotateStep=180;
 var currentAngle=0;
 var graphics;
 var radious=200;
@@ -12,19 +12,24 @@ var genetatedRadious=0;
 var isGameOver=false;
 var scoreLabel;
 var generatedAngle=0;
+var stepsCounter=2;
+var speed=3;
+var allColors=[0xff0000,0x00ff00,0x0000ff,0xffff00,0xff00ff,0x00ffff];
 var segment=function(segments,radious,width){
 	this.segments=segments;
+	stepsCounter=segments;
 	this.colors=[0xffd900,0xff0000];
 	this.radious=radious;
-	this.gap=1;
+	this.gap=0;
 	this.width=width;
 	this.create=function(graphics,game){
 		   var step=360/this.segments;
 		   var angle=0;
+		   rotateStep=step;
 		   this.graphics=graphics;
 		   this.game=game;
 			for(i=0;i<this.segments;i++){
-				  graphics.lineStyle(this.width, this.colors[i]);
+				  graphics.lineStyle(this.width, allColors[i]);
 				  graphics.arc(0, 0, this.radious,game.math.degToRad(angle-this.gap),  game.math.degToRad(angle+step-this.gap), false);
 				  angle+=step;
 			}	
@@ -35,7 +40,19 @@ var segment=function(segments,radious,width){
 		 var step=360/this.segments;
 		   var angle=0;
 			for(i=0;i<this.segments;i++){
-				  this.graphics.lineStyle(this.width, this.colors[i]);
+				  this.graphics.lineStyle(this.width, allColors[i]);
+				  this.graphics.arc(0, 0, this.radious,this.game.math.degToRad(angle-this.gap),  this.game.math.degToRad(angle+step-this.gap), false);
+				  angle+=step;
+			}	
+	 };
+	 this.recreate=function(segments){
+		 this.segments=segments;
+		 this.graphics.clear();
+		 var step=360/this.segments;
+		 rotateStep=step;
+		   var angle=0;
+			for(i=0;i<this.segments;i++){
+				  this.graphics.lineStyle(this.width, allColors[i]);
 				  this.graphics.arc(0, 0, this.radious,this.game.math.degToRad(angle-this.gap),  this.game.math.degToRad(angle+step-this.gap), false);
 				  angle+=step;
 			}	
@@ -47,7 +64,7 @@ var segment=function(segments,radious,width){
 	 this.setWidth=function(width){
 		 this.width=width;
 		 this.refresh();
-	 }
+	 };
 }
 var seg1=new segment(2,radious,width);
 var seg2=new segment(2,0,10);
@@ -133,6 +150,8 @@ Level.prototype.create = function () {
 			generatedAngle=0;
 			generatedGraphics.angle=generatedAngle;
 			graphics.angle=0;
+			angle.max=0;
+			currentAngle=0;
 	
 };
 
@@ -142,28 +161,29 @@ Level.prototype.create = function () {
 function left(){
 	if(isGameOver)
 		return;
-	currentAngle-=step;
+	currentAngle-=rotateStep;
 	this.add.tween(angle).to({max:currentAngle},400,"Linear",true,0,0,false);
 	
-  //console.log("Left clicked");
+  // console.log("Left clicked currentAngle "+currentAngle+" rotateStep "+rotateStep);
 }
 function right(){
 	if(isGameOver)
 		return;
-	currentAngle+=step;
+	currentAngle+=rotateStep;
 	this.add.tween(angle).to({max:currentAngle},400,"Linear",true,0,0,false); 
-	// console.log("Right clicked");
+   // console.log("Right clicked currentAngle "+currentAngle+" rotateStep "+rotateStep);
 }
 var generated=false;
 function generator(){
-	 console.log("generator 1");
+	// console.log("generator 1");
 	if(generated||isGameOver)
 		return;
 	
-	// console.log("generator 2");
-	 var angleFactor=this.rnd.integerInRange(0, 2);	
-	 generatedAngle=angleFactor*step;
+	
+	 var angleFactor=this.rnd.integerInRange(0, stepsCounter);	
+	 generatedAngle=angleFactor*rotateStep;
 	 generatedGraphics.angle=generatedAngle;
+	// console.log("generator 2 generatedAngle "+generatedAngle);
 	generated=true;
 	
 }
@@ -177,7 +197,7 @@ function fullScreen(){
 	{
 		this.scale.startFullScreen();
 	}
-	console.log("Sull screen");
+	//console.log("Sull screen");
 }
 function isMatched(generatedAngle,userAngle,segmentAngle){
 	var number1=((360+generatedAngle)%360)/segmentAngle;
@@ -190,17 +210,32 @@ Level.prototype.update=function(){
 		graphics.angle=angle.max;
 	//}
 	if(generated){
-		genetatedRadious+=4;
+		genetatedRadious+=speed;
 		seg2.setRadious(genetatedRadious);
 		if(genetatedRadious>=radious){
 			//radious-=5;
 			
-			if(isMatched(generatedAngle, currentAngle, step))
+			if(isMatched(generatedAngle, currentAngle, rotateStep))
 				{
 					score+=1;
 					scoreLabel.text=score;
 					//width+=10;
-					seg1.setWidth(width);
+					//seg1.setWidth(width);
+					if(stepsCounter==2&& score>30){
+							startNewLevel();
+					}
+					else if(stepsCounter==3&& score>55){
+							startNewLevel();
+					}
+					else if(stepsCounter==4&& score>70){
+						startNewLevel();
+					}
+					else if(stepsCounter==5&& score>85){
+						startNewLevel();
+					}
+					else if(stepsCounter==6&& score>100){
+						startNewLevel();
+					}
 				}
 			else
 				{
@@ -215,4 +250,20 @@ Level.prototype.update=function(){
 			generated=false;
 		}
 	}
+}
+
+function startNewLevel(){
+	
+	stepsCounter++;
+	if(stepsCounter>6)
+		stepsCounter=6;
+	else{
+		speed=1;
+		currentAngle=0;
+		angle.max=0;
+		seg1.recreate(stepsCounter);
+		seg2.recreate(stepsCounter);
+		seg2.setRadious(0);
+	}
+	
 }
